@@ -1,0 +1,52 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}<title>{{ news.title }}</title>{% endblock title %}
+
+{% block content %}
+    <h1>{{ news.title }}</h1><br>
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" style="width: 100%;">
+    <p>{{ news.body }}</p>
+    <p class="text-muted">{{ news.publish_time }}</p>
+    <br>
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+        <div class="card-footer text-center">
+            <a href="{% url 'news_edit' news.slug %}" class="btn btn-info">Tahrirlash</a>
+            <a href="{% url 'news_delete' news.slug %}" class="btn btn-danger">O'chirish</a>
+        </div>
+    {% endif %}<br><br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Ism</th>
+                <th scope="col">Familiya</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Created time</th>
+            </tr>
+        </thead>
+        <tbody> <!-- Move the tbody tag here -->
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.user.first_name }}</td>
+                    <td>{{ comment.user.last_name }}</td>
+                    <td>{{ comment.body | linebreaks }}</td>
+                    <td>{{ comment.created_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if request.user.is_authenticated %}
+        <form method="post" style="margin-top: 1.3em">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Comment qo'shing</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body" placeholder="Comment uchun"></textarea>
+                <input type="submit" value="Saqlash">
+            </div>
+        </form>
+    {% else %}
+        <p>Ro'yxatdan o'tgan foydalanuvchilar izoh qoldirishi mumkin </p>
+    {% endif %}
+{% endblock content %}

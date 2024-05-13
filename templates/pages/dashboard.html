@@ -1,0 +1,44 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}<title>{{ user.username }} dashboard</title>{% endblock %}
+
+{% block content %}
+    <h3>Xush kelibsiz {{ user.username }}</h3>
+
+    <form>
+      <fieldset disabled>
+        <legend>Siz haqingizda ma'lumotlar</legend>
+        <img src="{{ profil.photo.url }}" width="50%" alt="shbcd">
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">Familya</label>
+          <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.last_name }}">
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">Ism</label>
+          <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.first_name }}">
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">Foydalanuvchi nomi</label>
+          <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.username }}">
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">Email</label>
+          <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.email }}">
+        </div>
+
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+            <label class="form-check-label" for="disabledFieldsetCheck">
+              Buni tekshirib bo'lmaydi
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <h4><a class="btn btn-primary" href="{% url 'password_change' %}" style="border-radius: 5px">Parolni almashtirish</a> </h4>
+    <h4><a class="btn btn-primary" href="{% url 'password_reset' %}" style="border-radius: 5px">Parolni tiklash</a> </h4>
+    <h4><a class="btn btn-primary" href="{% url 'edit_user' %}" style="border-radius: 5px">Profilni tahrirlash</a> </h4>
+{% endblock content %}

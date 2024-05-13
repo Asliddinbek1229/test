@@ -1,0 +1,14 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}<title>Login Page</title>{% endblock %}
+
+{% block content %}
+    <h2>Saytga kirish</h2>
+    <p>Saytga kirish uchun quyidagi ma'lumotlarni to'ldiring!!!</p>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Kirish</button>
+    </form>
+    <a href="{% url 'register' %}">SignUp</a>
+{% endblock content %}

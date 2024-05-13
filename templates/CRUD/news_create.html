@@ -1,0 +1,30 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}<title>{{ news.title }}</title>{% endblock title %}
+
+{% block content %}
+    <h2 class="text-center">Yangilik qo'shish</h2>
+    <form method="post" enctype="multipart/form-data" id="newsForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit", class="btn btn-success">Saqlash</button>
+    </form>
+
+
+<!--    <script>-->
+<!--        const titleInput = document.querySelector('input[name=title');-->
+<!--        const slugInput = document.querySelector('input[name=slug]');-->
+
+<!--        const slugify = (val) => {-->
+<!--            return val.toString().toLowerCase().trim()-->
+<!--                .replace(/&/g, '-and-') // replacing & with '-and-'-->
+<!--                .replace(/[\s\W-]+/g, '-') //replcaing spaces, non-word chars and dashes with a single '-'-->
+<!--        };-->
+
+<!--        titleInput.addEventListener('keyup', (e) => {-->
+<!--            slugInput.setAttribute('value', slugify(titleInput.value));-->
+<!--        });-->
+<!--    </script>-->
+
+{% endblock content %}

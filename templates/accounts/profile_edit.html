@@ -1,0 +1,16 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}<title>User edit</title>{% endblock title %}
+
+{% block content %}
+    <h1>Foydalanuvchilarni ma'lumotlarini tahrirlash</h1>
+    <p>Ushbu formani to'ldiring!</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Edit</button>
+    </form>
+
+{% endblock content %}
